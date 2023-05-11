@@ -13,7 +13,7 @@ logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
 documents = SimpleDirectoryReader("data").load_data()
 # split the document to chunk, max token size=500, convert chunk to vector 
 
-index = GPTSimpleVectorIndex(documents)
+index =  GPTSimpleVectorIndex(documents)
 
 # save index
 index.save_to_disk("index.json")
