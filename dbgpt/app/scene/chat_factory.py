@@ -21,6 +21,7 @@ class ChatFactory(metaclass=Singleton):
         )
         from dbgpt.app.scene.chat_knowledge.refine_summary.prompt import prompt
         from dbgpt.app.scene.chat_knowledge.v1.chat import ChatKnowledge
+        from dbgpt.app.scene.chat_law.chat import ChatLaw
         from dbgpt.app.scene.chat_knowledge.v1.prompt import prompt
         from dbgpt.app.scene.chat_normal.chat import ChatNormal
         from dbgpt.app.scene.chat_normal.prompt import prompt

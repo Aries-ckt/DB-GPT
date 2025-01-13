@@ -12,6 +12,16 @@ import MyEmpty from '../common/MyEmpty';
 import MuiLoading from '../common/loading';
 import Completion from './completion';
 import Header from './header';
+import {Card, Spin } from 'antd';
+import dynamic from 'next/dynamic';
+import MarkDownContext from '@/new-components/common/MarkdownContext';
+// import AIEditor from '@/components/Editor';
+
+const AIEditor = dynamic(() => import("@/components/Editor"), {
+  ssr: false,
+  lang: "en",
+  loading: () => <Spin style={{ margin: "0 0 0 10px" }} />,
+});
 
 const ChatContainer = () => {
   const searchParams = useSearchParams();
@@ -112,14 +122,16 @@ const ChatContainer = () => {
           setModel(newModel);
         }}
       />
-      <div className='px-4 flex flex-1 flex-wrap overflow-hidden relative'>
-        {!!chartsData?.length && (
-          <div className='w-full pb-4 xl:w-3/4 h-1/2 xl:pr-4 xl:h-full overflow-y-auto'>
-            <Chart chartsData={chartsData} />
-          </div>
-        )}
-        {!chartsData?.length && scene === 'chat_dashboard' && <MyEmpty className='w-full xl:w-3/4 h-1/2 xl:h-full' />}
-        {/** chat panel */}
+     <div className='px-4 flex flex-1 flex-wrap overflow-hidden relative'>
+      <div className='w-full pb-4 xl:w-3/4 h-1/2 xl:pr-4 xl:h-full overflow-y-auto'>
+
+          <AIEditor
+                    placeholder="maxLength is 6"
+                    value={'xxx'}
+                    style={{ height: '1000px' }}
+//                     onChange={(val) => setContent(val)}
+                  />
+      </div>
         <div
           className={classNames('flex flex-1 flex-col overflow-hidden', {
             'px-0 xl:pl-4 h-1/2 w-full xl:w-auto xl:h-full border-t xl:border-t-0 xl:border-l dark:border-gray-800':

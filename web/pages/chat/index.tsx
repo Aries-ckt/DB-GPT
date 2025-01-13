@@ -280,17 +280,21 @@ const Chat: React.FC = () => {
   const contentRender = () => {
     if (scene === 'chat_dashboard') {
       return isContract ? <DbEditor /> : <ChatContainer />;
-    } else {
+    } else if(scene === 'chat_law') {
+        debugger;
+        return <ChatContainer />;
+    }
+    else {
       return isChatDefault ? (
         <Content>
           <ChatDefault />
         </Content>
       ) : (
-        <Spin spinning={historyLoading} className='w-full h-full m-auto'>
-          <Content className='flex flex-col h-screen'>
+        <Spin spinning={historyLoading} className='flex w-full h-full m-auto'>
+        <Content className='flex flex-col h-screen'>
             <ChatContentContainer ref={scrollRef} />
             <ChatInputPanel ctrl={ctrl} />
-          </Content>
+         </Content>
         </Spin>
       );
     }

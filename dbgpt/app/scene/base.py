@@ -93,6 +93,12 @@ class ChatScene(Enum):
         "Dialogue through natural language and private documents and knowledge bases.",
         ["Knowledge Space Select"],
     )
+    ChatLaw = Scene(
+        "chat_law",
+        "Chat Law",
+        "Dialogue through natural language and private documents and knowledge bases.",
+        [],
+    )
     ExtractTriplet = Scene(
         "extract_triplet",
         "Extract Triplet",

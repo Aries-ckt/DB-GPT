@@ -1077,6 +1077,13 @@ class GptsAppDao(BaseDao):
             param_title="",
             show_disable=False,
         )
+        chat_law_ctx = NativeTeamContext(
+            chat_scene="chat_law",
+            scene_name="Chat Law",
+            scene_describe="Law Gpt",
+            param_title="",
+            show_disable=False,
+        )
         chat_with_db_qa_ctx = NativeTeamContext(
             chat_scene="chat_with_db_qa",
             scene_name="Chat DB",
@@ -1155,6 +1162,29 @@ class GptsAppDao(BaseDao):
             gpts_dao.create(chat_normal_app)
         except Exception as ex:
             logger.exception(f"create chat_normal_app error: {ex}")
+
+
+        chat_law_app = GptsApp(
+            app_code=chat_law_ctx.chat_scene,
+            app_name=chat_law_ctx.scene_name,
+            language="en",
+            team_mode="native_app",
+            details=[],
+            app_describe=chat_law_ctx.scene_describe,
+            team_context=chat_law_ctx,
+            param_need=[
+                {"type": AppParamType.Model.value, "value": None},
+                {"type": AppParamType.Temperature.value, "value": None},
+                {"type": AppParamType.MaxNewTokens.value, "value": None},
+            ],
+            user_code=user_code,
+            published="true",
+        )
+        try:
+            gpts_dao.remove_native_app(chat_law_app.app_code)
+            gpts_dao.create(chat_law_app)
+        except Exception as ex:
+            logger.exception(f"create chat_law_app error: {ex}")
 
         chat_with_db_qa_app = GptsApp(
             app_code=chat_with_db_qa_ctx.chat_scene,
@@ -1364,6 +1394,24 @@ def native_app_params():
             {"type": AppParamType.MaxNewTokens.value, "value": None},
         ],
     }
+    chat_law = {
+        # "chat_scene": ChatScene.ChatLaw.value(),
+        # "scene_name": ChatScene.ChatLaw.scene_name(),
+        # "param_need": [
+        #     {"type": AppParamType.Resource.value, "value": ResourceType.DB.value},
+        #     {"type": AppParamType.Model.value, "value": None},
+        #     {"type": AppParamType.Temperature.value, "value": None},
+        #     {"type": AppParamType.MaxNewTokens.value, "value": None},
+        # ],
+        "chat_scene": ChatScene.ChatDashboard.value(),
+        "scene_name": ChatScene.ChatDashboard.scene_name(),
+        "param_need": [
+            {"type": AppParamType.Resource.value, "value": ResourceType.DB.value},
+            {"type": AppParamType.Model.value, "value": None},
+            {"type": AppParamType.Temperature.value, "value": None},
+            {"type": AppParamType.MaxNewTokens.value, "value": None},
+        ],
+    }
     return [
         chat_excel,
         chat_with_db_qa,
@@ -1371,6 +1419,7 @@ def native_app_params():
         chat_knowledge,
         chat_dashboard,
         chat_normal,
+        chat_law
     ]
 
 
@@ -1386,6 +1435,7 @@ def adapt_native_app_model(dialogue: ConversationVo):
             ChatScene.ChatWithDbExecute.value(),
             ChatScene.ChatDashboard.value(),
             ChatScene.ChatNormal.value,
+            ChatScene.ChatLaw.value,
         ]:
             return dialogue
         gpts_dao = GptsAppDao()
