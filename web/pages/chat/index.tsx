@@ -18,6 +18,7 @@ const DbEditor = dynamic(() => import('@/components/chat/db-editor'), {
   ssr: false,
 });
 const ChatContainer = dynamic(() => import('@/components/chat/chat-container'), { ssr: false });
+const ChatLawContainer = dynamic(() => import('@/components/chat/chat-law-container'), { ssr: false });
 
 const { Content } = Layout;
 
@@ -282,7 +283,7 @@ const Chat: React.FC = () => {
       return isContract ? <DbEditor /> : <ChatContainer />;
     } else if(scene === 'chat_law') {
         debugger;
-        return <ChatContainer />;
+        return <ChatLawContainer />;
     }
     else {
       return isChatDefault ? (

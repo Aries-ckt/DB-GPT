@@ -4,6 +4,7 @@ import ColorfulData from './colorful-data';
 import ColorfulDB from './colorful-db';
 import ColorfulDoc from './colorful-doc';
 import ColorfulExcel from './colorful-excel';
+import ColorfulLaw from './colorful-law';
 import ColorfulPlugin from './colorful-plugin';
 import DarkSvg from './dark-svg';
 import DBSvg from './db-svg';
@@ -25,6 +26,7 @@ export {
   ColorfulData,
   ColorfulDoc,
   ColorfulExcel,
+  ColorfulLaw,
   ColorfulPlugin,
   DBSvg,
   DarkSvg,

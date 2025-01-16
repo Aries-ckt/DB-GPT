@@ -5,6 +5,7 @@ import {
   ColorfulData,
   ColorfulDoc,
   ColorfulExcel,
+  ColorfulLaw,
   ColorfulPlugin,
 } from '@/components/icons';
 import Icon from '@ant-design/icons';
@@ -28,6 +29,8 @@ const AppDefaultIcon: React.FC<{ scene: string; width?: number; height?: number 
         return ColorfulPlugin;
       case 'chat_normal':
         return ColorfulChat;
+      case 'chat_law':
+        return ColorfulLaw;
       default:
         return;
     }
