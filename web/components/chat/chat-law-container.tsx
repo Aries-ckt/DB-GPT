@@ -133,7 +133,7 @@ const ChatContainer = () => {
                   />
       </div>
         <div
-          className={classNames('flex flex-1 flex-col overflow-hidden', {
+          className={classNames('overflow-y-auto flex flex-1 flex-col overflow-hidden', {
             'px-0 xl:pl-4 h-1/2 w-full xl:w-auto xl:h-full border-t xl:border-t-0 xl:border-l dark:border-gray-800':
               scene === 'chat_law',
             'h-full lg:px-8': scene !== 'chat_law',
