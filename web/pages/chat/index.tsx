@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ChatContext } from '@/app/chat-context';
 import { apiInterceptors, getAppInfo, getChatHistory, getDialogueList } from '@/client/api';
 import useChat from '@/hooks/use-chat';

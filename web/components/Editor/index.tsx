@@ -1,16 +1,16 @@
-// "use client"; // Next.JS
+// 'use client'; // Next.JS
+/* eslint-disable */
+import { AiEditor, AiEditorOptions } from 'aieditor';
+import 'aieditor/dist/style.css';
 
-import { AiEditor, AiEditorOptions } from "aieditor";
-import "aieditor/dist/style.css";
+import { HTMLAttributes, forwardRef, useEffect, useRef } from 'react';
 
-import { HTMLAttributes, forwardRef, useEffect, useRef } from "react";
-
-type AIEditorProps = Omit<HTMLAttributes<HTMLDivElement>, "onChange"> & {
+type AIEditorProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   placeholder?: string;
   defaultValue?: string;
   value?: string;
   onChange?: (val: string) => void;
-  options?: Omit<AiEditorOptions, "element">;
+  options?: Omit<AiEditorOptions, 'element'>;
 };
 
 export default forwardRef<HTMLDivElement, AIEditorProps>(function AIEditor(
@@ -33,18 +33,18 @@ export default forwardRef<HTMLDivElement, AIEditorProps>(function AIEditor(
     if (!aiEditorRef.current) {
       const aiEditor = new AiEditor({
         element: divRef.current,
-        lang: "en",
+        lang: 'en',
         fontFamily:{
         values:[
-            {name: "SimHei", value: "SimHei"},
-            {name: "Microsoft YaHei", value: "Microsoft YaHei"},
-            {name: "Arial", value: "Arial"},
+            {name: 'SimHei', value: 'SimHei'},
+            {name: 'Microsoft YaHei', value: 'Microsoft YaHei'},
+            {name: 'Arial', value: 'Arial'},
         ]
     },
         placeholder: placeholder,
         content: defaultValue,
         onChange: (ed) => {
-          if (typeof onChange === "function") {
+          if (typeof onChange === 'function') {
             onChange(ed.getMarkdown());
           }
         },
@@ -65,7 +65,7 @@ export default forwardRef<HTMLDivElement, AIEditorProps>(function AIEditor(
 
   useEffect(() => {
     if (ref) {
-      if (typeof ref === "function") {
+      if (typeof ref === 'function') {
         ref(divRef.current);
       } else {
         ref.current = divRef.current;
@@ -75,7 +75,7 @@ export default forwardRef<HTMLDivElement, AIEditorProps>(function AIEditor(
 
   useEffect(() => {
     if (aiEditorRef.current && value !== aiEditorRef.current.getMarkdown()) {
-      aiEditorRef.current.setContent(value || "");
+      aiEditorRef.current.setContent(value || '');
     }
   }, [value]);
 

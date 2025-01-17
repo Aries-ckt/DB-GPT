@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ChatContext } from '@/app/chat-context';
 import { apiInterceptors, getChatHistory } from '@/client/api';
 import useChat from '@/hooks/use-chat';
@@ -12,15 +13,14 @@ import MyEmpty from '../common/MyEmpty';
 import MuiLoading from '../common/loading';
 import Completion from './completion';
 import Header from './header';
-import {Card, Spin } from 'antd';
+import {Spin } from 'antd';
 import dynamic from 'next/dynamic';
-import MarkDownContext from '@/new-components/common/MarkdownContext';
 // import AIEditor from '@/components/Editor';
 
-const AIEditor = dynamic(() => import("@/components/Editor"), {
+const AIEditor = dynamic(() => import('@/components/Editor'), {
   ssr: false,
-  lang: "en",
-  loading: () => <Spin style={{ margin: "0 0 0 10px" }} />,
+  lang: 'en',
+  loading: () => <Spin style={{ margin: '0 0 0 10px' }} />,
 });
 
 const ChatContainer = () => {
@@ -30,7 +30,6 @@ const ChatContainer = () => {
   const initMessage = (searchParams && searchParams.get('initMessage')) ?? '';
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [chartsData, setChartsData] = useState<Array<ChartData>>();
 
   const getHistory = async () => {
     setLoading(true);
@@ -126,20 +125,22 @@ const ChatContainer = () => {
       <div className='w-full pb-4 xl:w-3/4 h-1/2 xl:pr-4 xl:h-full overflow-y-auto'>
 
           <AIEditor
-                    placeholder="maxLength is 6"
+                    placeholder='maxLength is 6'
                     value={'xxx'}
                     style={{ height: '1000px' }}
 //                     onChange={(val) => setContent(val)}
                   />
       </div>
         <div
-          className={classNames('overflow-y-auto flex flex-1 flex-col overflow-hidden', {
+          className={classNames('flex flex-1 flex-col overflow-hidden', {
             'px-0 xl:pl-4 h-1/2 w-full xl:w-auto xl:h-full border-t xl:border-t-0 xl:border-l dark:border-gray-800':
               scene === 'chat_law',
             'h-full lg:px-8': scene !== 'chat_law',
           })}
         >
+        <div className='h-[90vh] flex flex-col flex-row'>
           <Completion messages={history} onSubmit={handleChat} />
+          </div>
         </div>
       </div>
     </>
