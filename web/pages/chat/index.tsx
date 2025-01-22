@@ -283,7 +283,6 @@ const Chat: React.FC = () => {
     if (scene === 'chat_dashboard') {
       return isContract ? <DbEditor /> : <ChatContainer />;
     } else if(scene === 'chat_law') {
-        debugger;
         return <ChatLawContainer />;
     }
     else {

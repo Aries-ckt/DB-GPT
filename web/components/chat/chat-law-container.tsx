@@ -2,13 +2,12 @@
 import { ChatContext } from '@/app/chat-context';
 import { apiInterceptors, getChatHistory } from '@/client/api';
 import useChat from '@/hooks/use-chat';
-import { ChartData, ChatHistoryResponse } from '@/types/chat';
+import {ChatHistoryResponse } from '@/types/chat';
 import { getInitMessage } from '@/utils';
 import { useAsyncEffect } from 'ahooks';
 import classNames from 'classnames';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import Chart from '../chart';
 import MyEmpty from '../common/MyEmpty';
 import MuiLoading from '../common/loading';
 import Completion from './completion';
@@ -38,18 +37,6 @@ const ChatContainer = () => {
     setLoading(false);
   };
 
-  const getChartsData = (list: ChatHistoryResponse) => {
-    const contextTemp = list[list.length - 1]?.context;
-    if (contextTemp) {
-      try {
-        const contextObj = typeof contextTemp === 'string' ? JSON.parse(contextTemp) : contextTemp;
-        setChartsData(contextObj?.template_name === 'report' ? contextObj?.charts : undefined);
-      } catch (e) {
-        console.log(e);
-        setChartsData([]);
-      }
-    }
-  };
 
   useAsyncEffect(async () => {
     const initMessage = getInitMessage();
@@ -57,14 +44,6 @@ const ChatContainer = () => {
     await getHistory();
   }, [initMessage, chatId]);
 
-  useEffect(() => {
-    if (!history.length) return;
-    /** use last view model_name as default model name */
-    const lastView = history.filter(i => i.role === 'view')?.slice(-1)?.[0];
-    lastView?.model_name && setModel(lastView.model_name);
-
-    getChartsData(history);
-  }, [history.length]);
 
   useEffect(() => {
     return () => {
@@ -94,11 +73,9 @@ const ChatContainer = () => {
             setHistory([...tempHistory]);
           },
           onDone: () => {
-            getChartsData(tempHistory);
             resolve();
           },
           onClose: () => {
-            getChartsData(tempHistory);
             resolve();
           },
           onError: message => {
