@@ -103,7 +103,7 @@ const ChatContainer = () => {
 
           <AIEditor
                     placeholder='maxLength is 6'
-                    value={'xxx'}
+                    value={'write something here...'}
                     style={{ height: '1000px' }}
 //                     onChange={(val) => setContent(val)}
                   />
