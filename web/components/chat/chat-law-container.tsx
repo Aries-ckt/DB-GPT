@@ -92,19 +92,19 @@ const ChatContainer = () => {
   return (
     <>
       <MuiLoading visible={loading} />
-      <Header
+      {/* <Header
         refreshHistory={getHistory}
         modelChange={(newModel: string) => {
           setModel(newModel);
         }}
-      />
+      /> */}
      <div className='px-4 flex flex-1 flex-wrap overflow-hidden relative'>
-      <div className='w-full pb-4 xl:w-3/4 h-1/2 xl:pr-4 xl:h-full overflow-y-auto'>
+      <div className='w-full pb-4 xl:w-3/5 h-1/2 xl:pr-4 xl:h-full overflow-y-auto'>
 
           <AIEditor
                     placeholder='maxLength is 6'
                     value={'write something here...'}
-                    style={{ height: '1000px' }}
+                    style={{ height: '100vh' }}
 //                     onChange={(val) => setContent(val)}
                   />
       </div>
@@ -115,7 +115,7 @@ const ChatContainer = () => {
             'h-full lg:px-8': scene !== 'chat_law',
           })}
         >
-        <div className='h-[90vh] flex flex-col flex-row'>
+        <div className='h-[100vh] flex flex-col flex-row'>
           <Completion messages={history} onSubmit={handleChat} />
           </div>
         </div>
